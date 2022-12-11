@@ -42,6 +42,7 @@ func main() {
 	*/
 	var e interface{} = []int{10}
 	var f interface{} = []int{20}
-	fmt.Println(e == f)
+	fmt.Println(e, f)
+	//fmt.Println(e == f)  //会报错
 
 }
