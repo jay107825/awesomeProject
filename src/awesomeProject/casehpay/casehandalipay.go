@@ -50,5 +50,4 @@ func main() {
 	Print(new(Alipay))
 	// 使用现金判断
 	Print(new(Cash))
-
 }
