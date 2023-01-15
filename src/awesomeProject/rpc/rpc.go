@@ -37,7 +37,7 @@ func RPCServer(ch chan string) {
 		fmt.Println("server received", data)
 
 		//通过睡眠函数让程序执行阻塞2秒的任务
-		time.Sleep(time.Second * 18)
+		time.Sleep(time.Second * 10)
 
 		// 向客户端反馈已收到
 		ch <- "server：已收到"
