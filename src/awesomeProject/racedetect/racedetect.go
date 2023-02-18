@@ -15,13 +15,13 @@ import (
 
 var (
 	// 序列号
-	sep int64
+	sep int64 // 序列号生成器中保存上次序列号的变量
 )
 
 // 序列号生成器
 func GenID() int64 {
 	// 尝试原子的增加序列号
-	atomic.AddInt64(&sep, 1)
+	atomic.AddInt64(&sep, 1) // 使用原子操作函数atomic.Addint64() 对seq()函数加1操作。
 	return atomic.AddInt64(&sep, 1)
 }
 
@@ -32,3 +32,5 @@ func main() {
 	}
 	fmt.Println(GenID())
 }
+
+// 运行程序时 使用go run -race *.go
