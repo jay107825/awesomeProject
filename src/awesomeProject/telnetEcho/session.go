@@ -1,4 +1,4 @@
-package telnetEcho
+package main
 
 import (
 	"bufio"

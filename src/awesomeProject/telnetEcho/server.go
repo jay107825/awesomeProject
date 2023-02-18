@@ -1,4 +1,4 @@
-package telnetEcho
+package main
 
 import (
 	"fmt"
@@ -17,7 +17,6 @@ import (
 func server(address string, exitChan chan int) {
 	// 根据给定地址进行监听
 	l, err := net.Listen("tcp", address)
-
 	// 如果发生错误，打印错误并退出
 	if err != nil {
 		fmt.Println(err.Error())
@@ -25,10 +24,8 @@ func server(address string, exitChan chan int) {
 	}
 	// 打印监听地址
 	fmt.Println("listen: " + address)
-
 	//延迟关闭监听器
 	defer l.Close()
-
 	// 侦听循环
 	for {
 		// 新链接没有到来时，Accept是阻塞的
@@ -41,5 +38,4 @@ func server(address string, exitChan chan int) {
 		// 根据连接会话，这个过程需要并行执行
 		go handleSession(conn, exitChan)
 	}
-
 }
