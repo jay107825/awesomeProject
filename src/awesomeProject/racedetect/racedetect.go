@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sync"
 	"sync/atomic"
 )
 
@@ -25,12 +26,38 @@ func GenID() int64 {
 	return atomic.AddInt64(&sep, 1)
 }
 
+var (
+	//逻辑中使用的某个变量
+	count int
+	// 与变量对应的使用互斥锁
+	countGuard sync.Mutex
+)
+
+func GetCount() int {
+	// 锁定
+	countGuard.Lock()
+	//在函数退出时解除锁定
+	defer countGuard.Unlock()
+	return count
+}
+func SetCount(c int) {
+	countGuard.Lock()
+	count = c
+	countGuard.Unlock()
+}
+
 func main() {
 	// 生成10个并发序列号
-	for i := 0; i < 10; i++ {
-		go GenID()
-	}
-	fmt.Println(GenID())
+	//for i := 0; i < 10; i++ {
+	//	go GenID()
+	//}
+	//fmt.Println(GenID())
+
+	// 可以进行并发安全的设置
+	SetCount(2)
+	// 可以进行并发安全的获取
+	fmt.Println(GetCount())
+
 }
 
 // 运行程序时 使用go run -race *.go
