@@ -37,5 +37,17 @@ func main() {
 	typeOfA = reflect.TypeOf(Zero)
 	// 显示反射类型对象的名称和种类
 	fmt.Println(typeOfA.Name(), typeOfA.Kind())
+	fmt.Println("--------------指针与指针指向的元素------------")
+	// 声明一个空结构体
+	type cat1 struct {
+	}
+	// 创建cat1的实例
+	// 获取结构体实例的反射类型对象
+	typeOfCat2 := reflect.TypeOf(cat1{})
+	// 显示反射类型对象的名称和种类
+	fmt.Println("类型：", typeOfCat2.Name(), typeOfCat2.Kind())
+	// 获取zero产常量的反射类型对象
+	typeOfA = reflect.TypeOf(Zero)
+	fmt.Println(typeOfA.Name(), typeOfA.Kind())
 
 }
