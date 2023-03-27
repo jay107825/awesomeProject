@@ -31,7 +31,7 @@ func main() {
 		// 获取每个成员的结构字段类型
 		fieldType := typeOfCat.Field(i)
 		// 输出成员名和tag
-		fmt.Println("name:%v tag:'v'\n", fieldType.Name, fieldType.Tag)
+		fmt.Printf("name:%v tag:v'%v'\n", fieldType.Name, fieldType.Tag)
 	}
 	//通过字段名，找到字段类型信息
 	if catType, ok := typeOfCat.FieldByName("Type"); ok {
