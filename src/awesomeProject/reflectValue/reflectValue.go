@@ -24,5 +24,6 @@ func main() {
 
 	// 获取 64位的值 强制转换int类型
 	var getA2 int = int(valueOfa.Int())
+	
 	fmt.Println(getA, getA2)
 }
