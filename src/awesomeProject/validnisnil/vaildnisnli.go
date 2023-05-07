@@ -19,7 +19,7 @@ func main() {
 	var a *int
 	fmt.Println("var a int：", reflect.ValueOf(a).IsValid())
 
-	// nil值
+	// nil值  对niu值做判定
 	fmt.Println("nil：", reflect.ValueOf(nil).IsValid())
 
 	// *int 类型的空指针
@@ -33,4 +33,7 @@ func main() {
 
 	// 尝试从结构体中查找一个不存在的方法
 	fmt.Println("不存在的结构体方法：", reflect.ValueOf(s).MethodByName("").IsValid())
+
+	反射调用函数
 }
+
