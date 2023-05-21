@@ -1,4 +1,4 @@
-package marshajson
+package main
 
 import (
 	"bytes"

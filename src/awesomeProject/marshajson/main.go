@@ -1,4 +1,6 @@
-package marshajson
+package main
+
+import "fmt"
 
 /**
  * @Author: admin
@@ -7,9 +9,6 @@ package marshajson
  * @Version: 1.0.0
  * @Date: 2023/5/7 20:58
  */
-
-/**
-
 
 func main() {
 	// 声明技能结构
@@ -20,23 +19,26 @@ func main() {
 
 	// 声明角色结构
 	type Actor struct {
-		Name  string
-		Age   int
+		Name string
+		Age  int
+
 		Skill []Skill
 	}
 
 	//	填充基本角色数据
 	a := Actor{
-		Name: "cow boy",
+		Name: "jay",
 		Age:  24,
+
 		Skill: []Skill{
 			{Name: "jay", Level: 1},
 			{Name: "chai", Level: 2},
 			{Name: "chaizhijie", Level: 3},
 		},
 	}
-	if result, err := Marshajson(a); err == nil {
-
+	if result, err := Marshaljson(a); err == nil {
+		fmt.Println(result)
+	} else {
+		fmt.Println(err)
 	}
 }
-*/

@@ -1,4 +1,4 @@
-package marshajson
+package main
 
 import (
 	"bytes"
@@ -14,8 +14,9 @@ import (
  */
 
 func writeSlice(buff *bytes.Buffer, value reflect.Value) error {
+	//fmt.Println("执行到此！！！")
 	//	写入切片开始标记
-	buff.WriteString("i")
+	buff.WriteString("[")
 	//	遍历每个元素
 	for s := 0; s < value.Len(); s++ {
 		sliceValue := value.Index(s)
