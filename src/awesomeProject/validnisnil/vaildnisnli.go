@@ -34,6 +34,10 @@ func main() {
 	// 尝试从结构体中查找一个不存在的方法
 	fmt.Println("不存在的结构体方法：", reflect.ValueOf(s).MethodByName("").IsValid())
 
-	反射调用函数
-}
+	// 实例化一个map
+	m := map[int]int{}
 
+	// 尝试从map中查找一个不存在的键
+	fmt.Println("不存在的键：", reflect.ValueOf(m).MapIndex(reflect.ValueOf(3)).IsValid())
+
+}

@@ -28,6 +28,6 @@ func main() {
 	// 反射调用函数
 	reList := funcValue.Call(paramList)
 
-	// 获取第一个返回值，取整数值
+	// 获取第一个返回值，取整数值®
 	fmt.Println(reList[0].Int())
 }
