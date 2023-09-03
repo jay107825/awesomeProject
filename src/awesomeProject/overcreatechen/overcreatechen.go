@@ -36,9 +36,9 @@ func main() {
 		// 空变量，什么都不做
 		var dummy string
 
-		// 获取输入，模拟进程持续运行
+		// 获取输入，模拟进程持续运行1
 		fmt.Scan(&dummy)
-		if dummy == "quit" {
+		if dummy == "0" {
 			for i := 0; i < runtime.NumGoroutine()-1; i++ {
 				ch <- 0
 			}

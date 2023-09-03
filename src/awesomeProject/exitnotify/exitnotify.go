@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"net"
+	"sync"
+	"time"
 )
 
 /**
@@ -13,7 +15,7 @@ import (
  * @Date: 2023/7/5 22:12
  */
 
-func socketRecv(conn net.Conn, exitChan chan string) {
+func socketRecv(conn net.Conn, wg *sync.WaitGroup) {
 
 	// 创建一个接受的缓冲
 	buff := make([]byte, 1024)
@@ -29,7 +31,8 @@ func socketRecv(conn net.Conn, exitChan chan string) {
 		}
 	}
 	//函数已经结束，发出通知
-	exitChan <- "recv exit"
+	wg.Done()
+
 }
 
 func main() {
@@ -42,14 +45,21 @@ func main() {
 	}
 
 	// 创建退出通道
-	exit := make(chan string)
+	var wg sync.WaitGroup
+
+	// 添加1个任务
+	wg.Add(1)
 
 	// 并发执行套件字接收
-	go socketRecv(conn, exit)
+	go socketRecv(conn, &wg)
 
 	// 在接受时，等待1秒
+	time.Sleep(time.Second)
+
+	// 主动退出
 	conn.Close()
 
-	// 等待goroutine 退出完毕
-	fmt.Println(<-exit)
+	// 等待通道退出完毕
+	wg.Wait()
+	fmt.Println("recv done")
 }
