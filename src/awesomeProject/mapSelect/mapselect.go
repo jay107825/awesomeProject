@@ -19,7 +19,7 @@ package mapSelect
 //func simpleHash(str string) (ret int) {
 //	// 遍历字符串的每一个ASCII字符
 //	for i := 0; i < len(str); i++ {
-//		// 取出字符
+//		// 取出字符t
 //		c := str[i]
 //		//将字符的AACII字符相加
 //		ret += int(c)
