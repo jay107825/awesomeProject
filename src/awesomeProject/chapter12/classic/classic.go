@@ -108,6 +108,46 @@ func data() interface{} {
 	return input
 }
 
+// ------------------------------------new
+// 利用map特性的多键索引及查询
+// 查询键
+type queryKey struct {
+	Name string
+	Age  int
+}
+
+// 创建查询键到数据的映射
+var mappers = make(map[queryKey]*Proflie)
+
+// 创建查询索引
+func bulIdIndexNew(list []*Proflie) {
+	// 遍历所有数据
+	for _, proflie := range list {
+		// 构建查询键
+		key := queryKey{
+			Name: proflie.Name,
+			Age:  proflie.Age,
+		}
+		mappers[key] = proflie
+	}
+}
+
+func queryDatenew(name string, age int) {
+	// 根据查询条件构建查询键
+	key := queryKey{name, age}
+
+	// 根据键值查询到数据
+	result, ok := mappers[key]
+
+	// 找到数据打印出来
+	if ok {
+		fmt.Println(result)
+	} else {
+		fmt.Println("no found")
+	}
+
+}
+
 func main() {
 	list := []*Proflie{
 		{Name: "jay", Age: 25, Married: true},
@@ -134,4 +174,8 @@ func main() {
 	} else {
 		fmt.Println("查讯失败,查询内容不存在！")
 	}
+
+	// map 特征的多键特征查询
+	bulIdIndexNew(list)
+	queryDatenew("jay", 21)
 }
