@@ -1,6 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+)
 
 /**
  * @Author: admin
@@ -63,7 +68,7 @@ func buildIndex(list []*Proflie) {
 	}
 }
 
-func queryData(name string, age int) {
+func queryData(name string, age int) interface{} {
 
 	//根据给定查询条件构建查询键
 	keyToQuery := classicQueryKey{name, age}
@@ -76,12 +81,31 @@ func queryData(name string, age int) {
 
 		// 与查询结果对比，确定找到打印结果
 		if result.Name == name && result.Age == age {
-			fmt.Println(result)
-			return
+			//fmt.Println(result)
+			return result
 		}
 	}
 	// 没有找到结果
-	fmt.Println("no found")
+	return nil
+}
+
+func data() interface{} {
+	reader := bufio.NewReader(os.Stdin)
+
+	// 读取用户输入，直到按下 Ctrl+D（Unix 系统）或 Ctrl+Z（Windows 系统）
+	fmt.Print("请输入一些文本：")
+	input, err := reader.ReadString('\n')
+
+	if err != nil {
+		fmt.Println("读取输入时发生错误:", err)
+		return nil
+	}
+
+	// 去除输入字符串末尾的换行符
+	input = input[:len(input)-1]
+
+	fmt.Println("你要查询的是:", input)
+	return input
 }
 
 func main() {
@@ -92,6 +116,22 @@ func main() {
 
 	buildIndex(list)
 
-	queryData("jay", 25)
-	queryData("jay2", 25)
+	input := data()
+	str := input.(string)
+
+	inputage := data()
+	ages := inputage.(string)
+
+	num, err := strconv.Atoi(ages)
+	if err != nil {
+		fmt.Println("转换失败，请输入正整数:", err)
+		return
+	}
+
+	result := queryData(str, num)
+	if result != nil {
+		fmt.Println("查询结果是：", result)
+	} else {
+		fmt.Println("查讯失败,查询内容不存在！")
+	}
 }
