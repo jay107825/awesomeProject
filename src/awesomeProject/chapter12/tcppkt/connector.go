@@ -1,4 +1,4 @@
-package tcppkt
+package main
 
 import (
 	"fmt"

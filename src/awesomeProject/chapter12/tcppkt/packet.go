@@ -1,4 +1,4 @@
-package tcppkt
+package main
 
 import (
 	"bytes"
@@ -45,4 +45,32 @@ func writePacket(dataWriter io.Writer, data []byte) error {
 		return err
 	}
 	return nil
+}
+
+// 从dataReader中读取封包
+func readPacket(dataReader io.Reader) (pkt Packet, err error) {
+	// Size为uint16类型，占2个字节
+	var sizeBuffer = make([]byte, 2)
+
+	// 持续读取Size直到读到为止
+	_, err = io.ReadFull(dataReader, sizeBuffer)
+
+	// 发生错误时返回
+	if err != nil {
+		return
+	}
+	// 使用bytes.Reader读取sizeBuffer中的数据
+	sizeReader := bytes.NewReader(sizeBuffer)
+
+	// 读取小端的uint16作为size
+	err = binary.Read(sizeReader, binary.LittleEndian, &pkt.Size)
+	if err != nil {
+		return
+	}
+	// 分配包体大小
+	pkt.Body = make([]byte, pkt.Size)
+
+	// 读取包体数据
+	_, err = io.ReadFull(dataReader, pkt.Body)
+	return
 }

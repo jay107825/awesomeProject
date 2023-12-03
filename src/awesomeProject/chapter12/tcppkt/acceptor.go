@@ -1,4 +1,4 @@
-package tcppkt
+package main
 
 import (
 	"fmt"
@@ -50,16 +50,14 @@ func (a *Acceptor) listen(address string) {
 	// 侦听循环
 	for {
 		// 新连接没有到来时,Accept()
-		//conn, err := a.i.Accept()
+		conn, err := a.i.Accept()
 
 		// 如发生任何侦听错误。打印错误并退出服务器
 		if err != nil {
 			break
 		}
-
 		// 根据连接开启会话
-		// todo 需要定义方法
-		//go handleSession(conn, a.OnSessionData)
+		go handleSession(conn, a.OnSessionData)
 	}
 }
 
@@ -76,6 +74,5 @@ func (a *Acceptor) Wait() {
 // 实例化一个侦听器
 func NewAcceptor() *Acceptor {
 
-	return nil
-	// return &Accepto()   // todo  346 page
+	return &Acceptor{}
 }
