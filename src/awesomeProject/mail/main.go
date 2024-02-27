@@ -44,11 +44,12 @@ func sendEmail(to []string, subject string, body string, smtpServer, smtpPort, a
 }
 
 func main() {
-	to := []string{"recipient@example.com"}
+	fmt.Println("jay mail test")
+	to := []string{"mail.163.com"}
 	subject := "Subject: Your Email Subject Here\r\n"
 	body := "This is the body of the email message."
 	smtpServer := "mail.163.com"
-	smtpPort := "25" // 或者 "25", 取决于你的SMTP服务器设置
+	smtpPort := "56" // 或者 "25", 取决于你的SMTP服务器设置
 	authUsername := "17798128831@163.com"
 	authPassword := "Chai107825.."
 
